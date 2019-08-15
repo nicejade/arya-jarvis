@@ -1,0 +1,35 @@
+{
+  "name": "arya-jarvis",
+  "version": "1.1.0",
+  "description": "Arya Jarvis: Designed to save developers more time and energy.",
+  "main": "bin/index.js",
+  "bin": {
+    "arya": "bin/index.js"
+  },
+  "files": [
+    "bin/",
+    "helper/",
+    "helper/",
+    ".prettierignore"
+  ],
+  "scripts": {
+    "test": "test"
+  },
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "commander": "^3.0.0",
+    "onchange": "^6.0.0",
+    "prettier": "^1.18.2"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "semi": false,
+    "printWidth": 120,
+    "proseWrap": "never"
+  },
+  "keywords": [
+    "jarvis"
+  ],
+  "author": "nicejade",
+  "license": "ISC"
+}
