@@ -1,4 +1,4 @@
-<p align="center"><a href="https://www.jeffjade.com?utm_source=github.com" target="_blank"><img width="100"src="https://raw.githubusercontent.com/nicejade/arya-jarvis/master/src/assets/images/logo.png"></a></p>
+<p align="center"><a href="https://www.jeffjade.com?utm_source=github.com" target="_blank"><img width="100"src="https://raw.githubusercontent.com/nicejade/arya-jarvis/master/assets/images/logo.png"></a></p>
 
 <h1 align="center">ARYA JARVIS</h1>
 
@@ -15,7 +15,7 @@
     <img src="https://img.shields.io/badge/node-%3E%3D%208.0.0-green.svg" alt="Node Version">
   </a>
   <a href="https://github.com/nicejade/arya-jarvis">
-    <img src="https://img.shields.io/github/license/nicejade/arya-jarvis.svg" alt="LICENSE">
+    <img src="https://img.shields.io/github/license/nicejade/arya-jarvis" alt="LICENSE">
   </a>
   <a href="https://nicelinks.site/post/5c16083e819ae45de1453caa">
     <img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat" alt="Prettier">
@@ -37,19 +37,19 @@ The ideal goal is to help us deal with things that can be more precise in the si
 
 ## Prerequisites
 
-[Node.js](https://nodejs.org/en/) (>= 8.*), Npm version 4+(Yarn preferred), and [Git](https://git-scm.com/).
+[Node.js](https://nodejs.org/en/) (>= 8.*), Npm version 4+(Yarn preferred).
 
 ## Install
 
 ```bash
 npm i arya-jarvis -g
-# OR
+# Or
 yarn add global arya-jarvis
 ```
 
 ## Usage
 
-##### List the script commands in package.json.
+##### 🚝 List the script commands in package.json.
 
 ```bash
 arya ls
@@ -57,7 +57,7 @@ arya ls
 arya l
 ```
 
-##### Prettier the code under the specified path.
+##### 💄 Prettier the code under the specified path.
 
 ```bash
 arya prettier index.js
@@ -65,7 +65,7 @@ arya prettier index.js
 arya p src/**/*.js
 ```
 
-##### Listen for code changes in the specified path and prettier them.
+##### 🔬 Listen for code changes in the specified path and prettier them.
 
 ```bash
 arya watcher index.js
@@ -77,7 +77,7 @@ arya w src/**/*.js
 
 * [**NICE LINKS**](https://nicelinks.site/?utm_source=github.com)
 * [About Me](https://about.me/nicejade/?utm_source=github.com)
-* [Hexo Blog](https://jeffjade.com/?utm_source=github.com)
+* [**Hexo Blog**](https://jeffjade.com/?utm_source=github.com)
 * [VuePress Blog](https://www.lovejade.cn/?utm_source=github.com)
 * [VuePress Blog](https://nice.lovejade.cn/?utm_source=github.com)
 * [Ghost Blog](https://quickapp.lovejade.cn/?utm_source=github.com)
