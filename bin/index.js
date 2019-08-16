@@ -14,11 +14,18 @@ program
   .alias('l')
   .description('List the script commands in package.json.')
   .action(() => {
-    const scripts = require(`${process.cwd()}/package.json`).scripts
-    print('success', 'List the script commands in package.json:')
-    for (let key in scripts) {
+    let packageConf
+    try {
+      packageConf = require(`${process.cwd()}/package.json`)
+    } catch (error) {
+      const p = chalk.magenta(`package.json`)
+      return print('warn', `✘ have not found ${p} under the current directory.`)
+    }
+    const scriptsConf = packageConf.scripts
+    print('success', '✓ Okay, List the script commands in package.json:')
+    for (let key in scriptsConf) {
       const colorKey = chalk.magenta(`${key}`)
-      print('normal', `  ${colorKey}: ${scripts[key]}`)
+      print('normal', `${colorKey}: ${scriptsConf[key]}`)
     }
   })
 
@@ -28,8 +35,8 @@ program
   .description('Prettier the code under the specified path.')
   .action(params => {
     exec(`npx prettier --write ${params}`, (error, stdout, stderr) => {
-      if (error) return print(`error`, `Something Error: ${error}`)
-      print(`success`, 'Has successfully prettier your code.')
+      if (error) return print(`error`, `✘ Opps, Something Error: ${error}`)
+      print(`success`, '✓ Okay, Has successfully prettier your code.')
     })
   })
 
@@ -43,7 +50,7 @@ program
       print(`normal`, 'Be ready to beautify your changed code.')
       console.log(stdout)
       console.log(stderr)
-      if (error) return print(`error`, `Something Error: ${error}`)
+      if (error) return print(`error`, `✘ Opps, Something Error: ${error}`)
     })
   })
 
