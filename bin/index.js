@@ -39,7 +39,7 @@ program
   .description('Listen for code changes in the specified path and prettier them.')
   .action(params => {
     console.log(params)
-    exec(`npx onchange ${params} -- prettier --write {{changed}}`, (error, stdout, stderr) => {
+    exec(`npx onchange ${params} -- npx prettier --write {{changed}}`, (error, stdout, stderr) => {
       print(`normal`, 'Be ready to beautify your changed code.')
       console.log(stdout)
       console.log(stderr)
