@@ -62,7 +62,7 @@ arya l
 ```bash
 arya prettier index.js
 # Or 
-arya p src/**/*.js
+arya p ./src/**/**/*.js
 ```
 
 ##### 🔬 Listen for code changes in the specified path and prettier them.
@@ -70,7 +70,7 @@ arya p src/**/*.js
 ```bash
 arya watcher index.js
 # Or
-arya w src/**/*.js
+arya w ./src/**/**/*.js
 ```
 
 ## Recommended links
