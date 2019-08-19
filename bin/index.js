@@ -10,6 +10,16 @@ const version = require(`./../package.json`).version
 program.version(version, '-v, --vers', 'output the current version')
 
 program
+  .command('ip')
+  .description('Find your local IP address and print it.')
+  .action(() => {
+    exec(`node ./getip/index.js`, (error, stdout, stderr) => {
+      if (error) return print(`error`, `✘ Opps, Something Error: ${error}`)
+      console.log(stdout.replace('\n', ''))
+    })
+  })
+
+program
   .command('ls')
   .alias('l')
   .description('List the script commands in package.json.')
@@ -45,9 +55,8 @@ program
   .alias('w')
   .description('Listen for code changes in the specified path and prettier them.')
   .action(params => {
-    console.log(params)
+    print(`normal`, 'Be ready to beautify your changed code.')
     exec(`npx onchange ${params} -- npx prettier --write {{changed}}`, (error, stdout, stderr) => {
-      print(`normal`, 'Be ready to beautify your changed code.')
       console.log(stdout)
       console.log(stderr)
       if (error) return print(`error`, `✘ Opps, Something Error: ${error}`)
