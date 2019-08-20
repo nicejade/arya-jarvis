@@ -2,9 +2,14 @@
 
 const commander = require('commander')
 const program = new commander.Command()
+const path = require('path')
 const chalk = require('chalk')
 const print = require('./../helper/print')
 const { exec } = require('child_process')
+
+const resolve = dir => {
+  return path.join(__dirname, '..', dir)
+}
 
 const version = require(`./../package.json`).version
 program.version(version, '-v, --vers', 'output the current version')
@@ -13,7 +18,7 @@ program
   .command('ip')
   .description('Find your local IP address and print it.')
   .action(() => {
-    exec(`node ./getip/index.js`, (error, stdout, stderr) => {
+    exec(`node ${resolve('/getip/index.js')}`, (error, stdout, stderr) => {
       if (error) return print(`error`, `✘ Opps, Something Error: ${error}`)
       console.log(stdout.replace('\n', ''))
     })
@@ -47,7 +52,7 @@ program
       const p = chalk.magenta(`${port}`)
       return print(`warn`, `✘ Unacceptable port specification: ${p}.`)
     }
-    const generateCommand = require(`./../check-port/index.js`)
+    const generateCommand = require(resolve('/check-port/index.js'))
     const commandStr = generateCommand(port)
     exec(`${commandStr}`, (error, stdout, stderr) => {
       if (error) return print(`error`, `✘ Opps, Something Error: ${error}`)
