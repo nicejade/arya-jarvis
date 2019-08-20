@@ -40,11 +40,28 @@ program
   })
 
 program
+  .command('port <port>')
+  .description('View programs that occupy the specified port.')
+  .action(port => {
+    if (!/^[0-9]*$/.test(port)) {
+      const p = chalk.magenta(`${port}`)
+      return print(`warn`, `✘ Unacceptable port specification: ${p}.`)
+    }
+    const generateCommand = require(`./../check-port/index.js`)
+    const commandStr = generateCommand(port)
+    exec(`${commandStr}`, (error, stdout, stderr) => {
+      if (error) return print(`error`, `✘ Opps, Something Error: ${error}`)
+      console.log(stdout)
+    })
+  })
+
+program
   .command('prettier <path>')
   .alias('p')
   .description('Prettier the code under the specified path.')
   .action(params => {
     exec(`npx prettier --write ${params}`, (error, stdout, stderr) => {
+      console.log(stdout)
       if (error) return print(`error`, `✘ Opps, Something Error: ${error}`)
       print(`success`, '✓ Okay, Has successfully prettier your code.')
     })
@@ -58,7 +75,6 @@ program
     print(`normal`, 'Be ready to beautify your changed code.')
     exec(`npx onchange ${params} -- npx prettier --write {{changed}}`, (error, stdout, stderr) => {
       console.log(stdout)
-      console.log(stderr)
       if (error) return print(`error`, `✘ Opps, Something Error: ${error}`)
     })
   })
