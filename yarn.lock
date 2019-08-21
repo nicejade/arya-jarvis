@@ -159,6 +159,10 @@ picomatch@^2.0.4:
   version "2.0.7"
   resolved "https://registry.npmjs.org/picomatch/-/picomatch-2.0.7.tgz#514169d8c7cd0bdbeecc8a2609e34a7163de69f6"
 
+prettier-plugin-ux@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.npmjs.org/prettier-plugin-ux/-/prettier-plugin-ux-0.3.0.tgz#164ca9e19f4037b4e0d11d7b6ba04bb871ec72c5"
+
 prettier@^1.18.2:
   version "1.18.2"
   resolved "https://registry.npmjs.org/prettier/-/prettier-1.18.2.tgz#6823e7c5900017b4bd3acf46fe9ac4b4d7bda9ea"
