@@ -69,6 +69,22 @@ program
   })
 
 program
+  .command('server')
+  .alias('s')
+  .description('Used to quickly build a local web server.')
+  .action(() => {
+    portfinder.basePort = 8080
+    portfinder.getPortPromise().then(port => {
+      exec(`npx lws --stack lws-static lws-index --port ${port}`, error => {
+        if (error) return print(`error`, `✘ Opps, Something Error: ${error}`)
+      })
+      const ipAdress = chalk.magenta(`http://${getIp()}:${port}`)
+      const localAdress = chalk.magenta(`http://127.0.0.1:${port}`)
+      console.log(`Listening on ${ipAdress} , ${localAdress}`)
+    })
+  })
+
+program
   .command('watcher <path>')
   .alias('w')
   .description('Listen for code changes in the specified path and prettier them.')
