@@ -5,7 +5,7 @@ const program = new commander.Command()
 const path = require('path')
 const chalk = require('chalk')
 const portfinder = require('portfinder')
-const { checkPort, getIp, print } = require('./../helper')
+const { checkPort, getPrettify, getIp, print } = require('./../helper')
 const { exec } = require('child_process')
 
 const resolve = dir => {
@@ -60,8 +60,8 @@ program
   .command('prettier <path>')
   .alias('p')
   .description('Prettier the code under the specified path.')
-  .action(params => {
-    exec(`npx prettier --write ${params}`, (error, stdout, stderr) => {
+  .action(param => {
+    exec(`npx prettier --write ${getPrettify(param)}`, (error, stdout, stderr) => {
       console.log(stdout)
       if (error) return print(`error`, `✘ Opps, Something Error: ${error}`)
       print(`success`, '✓ Okay, Has successfully prettier your code.')
@@ -88,9 +88,9 @@ program
   .command('watcher <path>')
   .alias('w')
   .description('Listen for code changes in the specified path and prettier them.')
-  .action(params => {
-    print(`normal`, 'Be ready to beautify your changed code.')
-    exec(`npx onchange ${params} -- npx prettier --write {{changed}}`, (error, stdout, stderr) => {
+  .action(param => {
+    print(`normal`, 'Be ready to prettier your changed code.')
+    exec(`npx onchange ${getPrettify(param)} -- npx prettier --write {{changed}}`, (error, stdout, stderr) => {
       console.log(stdout)
       if (error) return print(`error`, `✘ Opps, Something Error: ${error}`)
     })
