@@ -26,8 +26,15 @@ const getIp = () => {
   return localIpAdress
 }
 
+const getPrettify = (path = '.') => {
+  const defaultPath = '"**/**/*.{js,vue,ux,less,scss,css,json,md,html,qxml,wxml}"'
+  const isUseDefalut = path === '.' || path === '*' || path === './'
+  return (isUseDefalut && defaultPath) || path
+}
+
 module.exports = {
   checkPort,
+  getPrettify,
   getIp,
   print
 }
