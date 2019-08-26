@@ -75,7 +75,9 @@ program
   .action(() => {
     portfinder.basePort = 8080
     portfinder.getPortPromise().then(port => {
-      exec(`npx lws --stack lws-static lws-index --port ${port}`, error => {
+      const stack = resolve('./node_modules/lws-static')
+      const index = resolve('./node_modules/lws-index')
+      exec(`npx lws --stack ${stack} ${index} --port ${port}`, error => {
         if (error) return print(`error`, `✘ Opps, Something Error: ${error}`)
       })
       const ipAdress = chalk.magenta(`http://${getIp()}:${port}`)
