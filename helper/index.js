@@ -23,7 +23,7 @@ const getIp = () => {
       }
     }
   }
-  return localIpAdress
+  return localIpAdress || 'localhost'
 }
 
 const getPrettify = (path = '.') => {
