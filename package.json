@@ -25,7 +25,8 @@
     "onchange": "^6.0.0",
     "portfinder": "^1.0.23",
     "prettier": "^1.18.2",
-    "prettier-plugin-ux": "^0.3.0"
+    "prettier-plugin-ux": "^0.3.0",
+    "qrcode-terminal": "^0.12.0"
   },
   "prettier": {
     "singleQuote": true,
