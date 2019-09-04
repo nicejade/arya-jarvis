@@ -2,11 +2,10 @@
 
 const commander = require('commander')
 const program = new commander.Command()
-const os = require('os')
 const path = require('path')
 const chalk = require('chalk')
 const portfinder = require('portfinder')
-const { checkPort, getPrettify, getIp, print } = require('./../helper')
+const { checkPort, getPrettify, print, showServerAdress } = require('./../helper')
 const { exec } = require('child_process')
 
 const resolve = dir => {
@@ -81,10 +80,7 @@ program
       exec(`npx lws --stack ${stack} ${index} --port ${port}`, error => {
         if (error) return print(`error`, `✘ Opps, Something Error: ${error}`)
       })
-      const hostname = chalk.magenta(`http://${os.hostname}:${port}`)
-      const ipAdress = chalk.magenta(`http://${getIp()}:${port}`)
-      const localAdress = chalk.magenta(`http://127.0.0.1:${port}`)
-      console.log(`Listening on ${hostname} , ${ipAdress} , ${localAdress}`)
+      showServerAdress(port)
     })
   })
 

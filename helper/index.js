@@ -1,3 +1,7 @@
+const os = require('os')
+const chalk = require('chalk')
+const qrcode = require('qrcode-terminal')
+
 const print = require('./print')
 const platform = process.platform
 
@@ -32,9 +36,20 @@ const getPrettify = (path = '.') => {
   return (isUseDefalut && defaultPath) || path
 }
 
+const showServerAdress = port => {
+  const hostname = chalk.magenta(`http://${os.hostname}:${port}`)
+  const ipAdress = chalk.magenta(`http://${getIp()}:${port}`)
+  const localAdress = chalk.magenta(`http://127.0.0.1:${port}`)
+  qrcode.generate(`http://${getIp()}:${port}`, qrcode => {
+    console.log(qrcode)
+  })
+  console.log(`\nListening on：\n✓ ${hostname} \n✓ ${ipAdress} \n✓ ${localAdress}`)
+}
+
 module.exports = {
   checkPort,
   getPrettify,
   getIp,
-  print
+  print,
+  showServerAdress
 }
