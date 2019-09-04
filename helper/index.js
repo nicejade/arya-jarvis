@@ -1,6 +1,6 @@
 const os = require('os')
 const chalk = require('chalk')
-const qrcode = require('qrcode-terminal')
+const qrcode = require('qrcode')
 
 const print = require('./print')
 const platform = process.platform
@@ -40,8 +40,8 @@ const showServerAdress = port => {
   const hostname = chalk.magenta(`http://${os.hostname}:${port}`)
   const ipAdress = chalk.magenta(`http://${getIp()}:${port}`)
   const localAdress = chalk.magenta(`http://127.0.0.1:${port}`)
-  qrcode.generate(`http://${getIp()}:${port}`, qrcode => {
-    console.log(qrcode)
+  qrcode.toString(`http://${getIp()}:${port}`, { type: 'terminal' }, (err, url) => {
+    console.log(url)
   })
   console.log(`\nListening on：\n✓ ${hostname} \n✓ ${ipAdress} \n✓ ${localAdress}`)
 }
