@@ -5,7 +5,7 @@ const program = new commander.Command()
 const path = require('path')
 const chalk = require('chalk')
 const portfinder = require('portfinder')
-const { checkPort, getPrettify, print, showServerAdress } = require('./../helper')
+const { checkPort, getIp, getPrettify, print, saveQrcode2Local, showServerAdress } = require('./../helper')
 const { exec } = require('child_process')
 
 const resolve = dir => {
@@ -69,18 +69,28 @@ program
   })
 
 program
+  .command('qrcode <path>')
+  .description('Generate a QR code based on the specified string.')
+  .action(param => {
+    saveQrcode2Local(param)
+  })
+
+program
   .command('server')
   .alias('s')
+  .option('-h, --https', 'Launch an HTTPS server on the specified port.')
   .description('Used to quickly build a local web server.')
-  .action(() => {
+  .action(params => {
+    const protocol = params.https ? `https` : 'http'
+    const pro = params.https ? `--https` : ''
     portfinder.basePort = 8080
     portfinder.getPortPromise().then(port => {
       const stack = resolve('./node_modules/lws-static')
       const index = resolve('./node_modules/lws-index')
-      exec(`npx lws --stack ${stack} ${index} --port ${port}`, error => {
+      exec(`npx lws --stack ${stack} ${index} --port ${port} ${pro}`, error => {
         if (error) return print(`error`, `✘ Opps, Something Error: ${error}`)
       })
-      showServerAdress(port)
+      showServerAdress(port, protocol)
     })
   })
 

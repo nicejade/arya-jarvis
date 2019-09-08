@@ -30,26 +30,53 @@ const getIp = () => {
   return localIpAdress || 'localhost'
 }
 
+const getDate = () => {
+  const date = new Date()
+  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+}
+
 const getPrettify = (path = '.') => {
   const defaultPath = '"**/**/*.{js,vue,ux,less,scss,css,json,md,html,qxml,wxml}"'
   const isUseDefalut = path === '.' || path === '*' || path === './'
   return (isUseDefalut && defaultPath) || path
 }
 
-const showServerAdress = port => {
-  const hostname = chalk.magenta(`http://${os.hostname}:${port}`)
-  const ipAdress = chalk.magenta(`http://${getIp()}:${port}`)
-  const localAdress = chalk.magenta(`http://127.0.0.1:${port}`)
-  qrcode.toString(`http://${getIp()}:${port}`, { type: 'terminal' }, (err, url) => {
+const showServerAdress = (port, protocol) => {
+  const hostname = chalk.magenta(`${protocol}://${os.hostname}:${port}`)
+  const ipAdress = chalk.magenta(`${protocol}://${getIp()}:${port}`)
+  const localAdress = chalk.magenta(`${protocol}://127.0.0.1:${port}`)
+  qrcode.toString(`${protocol}://${getIp()}:${port}`, { type: 'terminal' }, (err, url) => {
     console.log(url)
   })
   console.log(`\nListening on：\n✓ ${hostname} \n✓ ${ipAdress} \n✓ ${localAdress}`)
 }
 
+const saveQrcode2Local = string => {
+  const filename = `arya-qrcode-${getDate()}.png`
+  qrcode.toFile(
+    filename,
+    string,
+    {
+      width: 300,
+      height: 300,
+      color: {
+        dark: '#000000ff',
+        light: '#0000'
+      }
+    },
+    err => {
+      if (err) throw err
+      print(`success`, '✓ Okay, Has successfully generate & save your qrcode.')
+    }
+  )
+}
+
 module.exports = {
   checkPort,
   getPrettify,
+  getDate,
   getIp,
   print,
+  saveQrcode2Local,
   showServerAdress
 }
