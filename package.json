@@ -1,6 +1,6 @@
 {
   "name": "arya-jarvis",
-  "version": "1.5.0",
+  "version": "1.7.0",
   "description": "Arya Jarvis: Designed to save developers more time and energy.",
   "main": "bin/index.js",
   "bin": {
@@ -31,7 +31,7 @@
   "prettier": {
     "singleQuote": true,
     "semi": false,
-    "printWidth": 120,
+    "printWidth": 100,
     "proseWrap": "never"
   },
   "keywords": [
