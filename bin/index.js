@@ -3,10 +3,18 @@
 const commander = require('commander')
 const program = new commander.Command()
 const path = require('path')
+const { exec } = require('child_process')
 const chalk = require('chalk')
 const portfinder = require('portfinder')
-const { checkPort, getIp, getPrettify, print, saveQrcode2Local, showServerAdress } = require('./../helper')
-const { exec } = require('child_process')
+const {
+  clear,
+  checkPort,
+  getIp,
+  getPrettify,
+  print,
+  saveQrcode2Local,
+  showServerAdress
+} = require('./../helper')
 
 const resolve = dir => {
   return path.join(__dirname, '..', dir)
@@ -14,6 +22,14 @@ const resolve = dir => {
 
 const version = require(`./../package.json`).version
 program.version(version, '-v, --vers', 'output the current version')
+
+program
+  .command('clear')
+  .alias('c')
+  .description('Clear the terminal screen if possible.')
+  .action(() => {
+    clear()
+  })
 
 program
   .command('ip')
@@ -100,10 +116,13 @@ program
   .description('Listen for code changes in the specified path and prettier them.')
   .action(param => {
     print(`normal`, 'Be ready to prettier your changed code.')
-    exec(`npx onchange ${getPrettify(param)} -- npx prettier --write {{changed}}`, (error, stdout, stderr) => {
-      console.log(stdout)
-      if (error) return print(`error`, `✘ Opps, Something Error: ${error}`)
-    })
+    exec(
+      `npx onchange ${getPrettify(param)} -- npx prettier --write {{changed}}`,
+      (error, stdout, stderr) => {
+        console.log(stdout)
+        if (error) return print(`error`, `✘ Opps, Something Error: ${error}`)
+      }
+    )
   })
 
 program.parse(process.argv)

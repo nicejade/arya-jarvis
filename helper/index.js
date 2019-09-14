@@ -2,6 +2,7 @@ const os = require('os')
 const chalk = require('chalk')
 const qrcode = require('qrcode')
 
+const clear = require('./clear')
 const print = require('./print')
 const platform = process.platform
 
@@ -72,6 +73,7 @@ const saveQrcode2Local = string => {
 }
 
 module.exports = {
+  clear,
   checkPort,
   getPrettify,
   getDate,
