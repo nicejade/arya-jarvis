@@ -11,6 +11,7 @@ const {
   checkPort,
   getIp,
   getPrettify,
+  getPrettifyOptions,
   print,
   saveQrcode2Local,
   showServerAdress
@@ -77,7 +78,8 @@ program
   .alias('p')
   .description('Prettier the code under the specified path.')
   .action(param => {
-    exec(`npx prettier --write ${getPrettify(param)}`, (error, stdout, stderr) => {
+    const options = getPrettifyOptions()
+    exec(`npx prettier ${options} --write ${getPrettify(param)}`, (error, stdout, stderr) => {
       console.log(stdout)
       if (error) return print(`error`, `✘ Opps, Something Error: ${error}`)
       print(`success`, '✓ Okay, Has successfully prettier your code.')
@@ -116,8 +118,9 @@ program
   .description('Listen for code changes in the specified path and prettier them.')
   .action(param => {
     print(`normal`, 'Be ready to prettier your changed code.')
+    const options = getPrettifyOptions()
     exec(
-      `npx onchange ${getPrettify(param)} -- npx prettier --write {{changed}}`,
+      `npx onchange ${getPrettify(param)} -- npx prettier ${options} --write {{changed}}`,
       (error, stdout, stderr) => {
         console.log(stdout)
         if (error) return print(`error`, `✘ Opps, Something Error: ${error}`)
