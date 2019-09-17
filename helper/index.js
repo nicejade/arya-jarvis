@@ -37,9 +37,14 @@ const getDate = () => {
 }
 
 const getPrettify = (path = '.') => {
-  const defaultPath = '"**/**/*.{js,vue,ux,less,scss,css,json,md,html,qxml,wxml}"'
+  const defaultPath = '"**/**/*.{js,vue,ux,less,scss,css,json,md,mdx,html,qxml,wxml,yaml,graphql}"'
   const isUseDefalut = path === '.' || path === '*' || path === './'
   return (isUseDefalut && defaultPath) || path
+}
+
+const getPrettifyOptions = () => {
+  // 分别是：单引号，无分号，打印宽度 100
+  return `--single-quote --no-semi --print-width 100`
 }
 
 const showServerAdress = (port, protocol) => {
@@ -76,6 +81,7 @@ module.exports = {
   clear,
   checkPort,
   getPrettify,
+  getPrettifyOptions,
   getDate,
   getIp,
   print,
