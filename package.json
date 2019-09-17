@@ -7,10 +7,8 @@
     "arya": "bin/index.js"
   },
   "files": [
-    "bin/",
-    "helper/",
-    "check-port/",
-    "getip/",
+    "bin",
+    "helper",
     ".prettierignore"
   ],
   "scripts": {
@@ -28,6 +26,7 @@
     "prettier-plugin-ux": "^0.3.0",
     "qrcode": "^1.4.1"
   },
+  "devDependencies": {},
   "prettier": {
     "singleQuote": true,
     "semi": false,
@@ -38,6 +37,5 @@
     "jarvis"
   ],
   "author": "nicejade",
-  "license": "ISC",
-  "devDependencies": {}
+  "license": "ISC"
 }
