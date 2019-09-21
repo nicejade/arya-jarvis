@@ -1,17 +1,20 @@
 #!/usr/bin/env node
 
-const commander = require('commander')
-const program = new commander.Command()
+const fs = require('fs')
 const path = require('path')
 const { exec } = require('child_process')
 const chalk = require('chalk')
 const portfinder = require('portfinder')
+const commander = require('commander')
+const program = new commander.Command()
+
 const {
   clear,
   checkPort,
   getIp,
   getPrettify,
   getPrettifyOptions,
+  previewMarkdown,
   print,
   saveQrcode2Local,
   showServerAdress
@@ -56,6 +59,22 @@ program
     for (let key in scriptsConf) {
       const colorKey = chalk.magenta(`${key}`)
       print('normal', `${colorKey}: ${scriptsConf[key]}`)
+    }
+  })
+
+program
+  .command('markdown <path>')
+  .alias('m')
+  .description('Preview the specified markdown file.')
+  .action(mdFilePath => {
+    const isExists = fs.existsSync(mdFilePath)
+    if (isExists) {
+      portfinder.basePort = 8080
+      portfinder.getPortPromise().then(port => {
+        previewMarkdown(mdFilePath, port)
+      })
+    } else {
+      print(`warn`, 'What you specified is a non-existent file address.')
     }
   })
 

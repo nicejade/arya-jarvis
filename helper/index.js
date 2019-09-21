@@ -5,6 +5,7 @@ const qrcode = require('qrcode')
 const clear = require('./clear')
 const print = require('./print')
 const platform = process.platform
+const { previewMarkdown } = require('./markdown')
 
 const checkPort = port => {
   let commandStr
@@ -84,6 +85,7 @@ module.exports = {
   getPrettifyOptions,
   getDate,
   getIp,
+  previewMarkdown,
   print,
   saveQrcode2Local,
   showServerAdress
