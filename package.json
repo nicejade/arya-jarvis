@@ -7,6 +7,7 @@
     "arya": "bin/index.js"
   },
   "files": [
+    "assets",
     "bin",
     "helper",
     ".prettierignore"
@@ -17,6 +18,7 @@
   "dependencies": {
     "chalk": "^2.4.2",
     "commander": "^3.0.0",
+    "gulp-watch": "^5.0.1",
     "koa": "^2.8.1",
     "lws": "^2.0.3",
     "lws-index": "^1.0.5",
@@ -27,7 +29,8 @@
     "portfinder": "^1.0.23",
     "prettier": "^1.18.2",
     "prettier-plugin-ux": "^0.3.0",
-    "qrcode": "^1.4.1"
+    "qrcode": "^1.4.1",
+    "socket.io": "^2.3.0"
   },
   "devDependencies": {},
   "prettier": {
