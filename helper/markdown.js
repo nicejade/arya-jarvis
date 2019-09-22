@@ -1,8 +1,11 @@
 const fs = require('fs')
 const opn = require('opn')
 const marked = require('marked')
+const Koa = require('koa')
+const watch = require('gulp-watch')
 
 const print = require('./print')
+
 const markdownCss = require('../assets/style/markdown.js')
 const HTML_CONF = `<!doctype html>
 <html>
@@ -17,27 +20,74 @@ const HTML_CONF = `<!doctype html>
   <body>
     <div id="app" class="markdown-body">#CONTENT#</div>
   </body>
+  <script src="https://cdn.jsdelivr.net/npm/socket.io-client@2/dist/socket.io.js"></script>
+  <script>
+    var socket = io('http://localhost:#PORT#')
+    socket.onopen = function () {
+      ws.send('arya jarvis!')
+    }
+    socket.on('connect', function(){})
+    socket.on('refresh-content', function(data){
+      document.querySelector('html').innerHTML = data
+    })
+    socket.on('disconnect', function(){
+      socket.close()
+    })
+    socket.onclose = function(evt) {
+      console.log("Connection closed.")
+    }
+  </script>
 </html>`
 
-const createServer = (content, port) => {
-  const Koa = require('koa')
-  const app = new Koa()
+let app = new Koa()
+let server
+let socketio
+let targetWebPath
+let isCreatedServer = false
+
+const createServer = (content, port, isWatchChange) => {
+  server = require('http').createServer(app.callback())
   app.use(ctx => {
     ctx.body = content
   })
-  app.listen(port)
+  if (isWatchChange) createWebsocket(server)
+
+  targetWebPath = `http://localhost:${port}`
+  server.listen(port, () => {
+    print(`success`, `Listening on ${targetWebPath}`)
+  })
+  opn(targetWebPath)
 }
 
-const previewMarkdown = (mdFilePath, port) => {
+const createWebsocket = server => {
+  socketio = require('socket.io')(server)
+  socketio.on('connection', socket => {
+    print('normal', '💍 Welcome to use arya to preview Md.')
+  })
+}
+
+const readFile2update = (mdFilePath, port, isWatch) => {
   fs.readFile(mdFilePath, (err, data) => {
     if (err) return print(`error`, err)
     const content = marked(data.toString(), {})
-    const body = HTML_CONF.replace(`#CONTENT#`, content)
-    createServer(body, port)
-    const targetWebPath = `http://localhost:${port}`
-    opn(targetWebPath)
-    print(`success`, `Listening on ${targetWebPath}`)
+    const body = HTML_CONF.replace(`#CONTENT#`, content).replace('#PORT#', port)
+    if (!isCreatedServer) {
+      isCreatedServer = true
+      createServer(body, port, isWatch)
+    }
+    if (isWatch) {
+      socketio.emit(`refresh-content`, body)
+    }
   })
+}
+
+const previewMarkdown = (mdFilePath, port, isWatch) => {
+  readFile2update(mdFilePath, port, isWatch)
+  if (isWatch) {
+    watch(mdFilePath, () => {
+      readFile2update(mdFilePath, port, isWatch)
+    })
+  }
 }
 
 module.exports = {
