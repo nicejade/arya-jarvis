@@ -5,6 +5,7 @@ const Koa = require('koa')
 const watch = require('gulp-watch')
 
 const print = require('./print')
+const { throttle } = require('./utils')
 
 const markdownCss = require('../assets/style/markdown.js')
 const HTML_CONF = `<!doctype html>
@@ -84,9 +85,10 @@ const readFile2update = (mdFilePath, port, isWatch) => {
 const previewMarkdown = (mdFilePath, port, isWatch) => {
   readFile2update(mdFilePath, port, isWatch)
   if (isWatch) {
-    watch(mdFilePath, () => {
+    const callback = throttle(() => {
       readFile2update(mdFilePath, port, isWatch)
-    })
+    }, 1000)
+    watch(mdFilePath, callback)
   }
 }
 
