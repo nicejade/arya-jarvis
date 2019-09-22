@@ -65,13 +65,15 @@ program
 program
   .command('markdown <path>')
   .alias('m')
+  .option('-w, --watch', 'Listen for specified file changes and refresh the preview.')
   .description('Preview the specified markdown file.')
-  .action(mdFilePath => {
+  .action((mdFilePath, commands) => {
+    const isWatch = commands.watch || false
     const isExists = fs.existsSync(mdFilePath)
     if (isExists) {
       portfinder.basePort = 8080
       portfinder.getPortPromise().then(port => {
-        previewMarkdown(mdFilePath, port)
+        previewMarkdown(mdFilePath, port, isWatch)
       })
     } else {
       print(`warn`, 'What you specified is a non-existent file address.')
