@@ -31,7 +31,7 @@
   </a>
 </div>
 
-#### English | [中文](https://www.jeffjade.com/2019/08/25/156-arya-jarvis-born-for-efficiency)
+### English | [中文](https://www.jeffjade.com/2019/08/25/156-arya-jarvis-born-for-efficiency)
 
 ## Goal and Philosophy
 
@@ -83,6 +83,24 @@ arya server
 arya s
 ```
 
+#### 🌊 One-click preview of the specified Markdown file
+
+```bash
+arya markdown README.md
+arya markdown ./nice-project/README.md
+# 👏 Or Use Alias
+arya m README.md
+```
+
+##### Watcher (`-w` , `--watch`)
+
+By default, the `Markdown` file you specify will not be listened. You can enable the monitor function by adding the `-w` option to refresh your preview page in real time. See the example below：
+
+```bash
+arya markdown README.md -w
+arya markdown README.md --watch
+```
+
 #### ⚡️ Find your local IP address and print it.
 
 ```bash
@@ -94,6 +112,16 @@ arya ip
 ```bash
 arya port 8080
 ```
+
+### ✂️ Clear the terminal screen if possible
+
+```bash
+arya clear
+# Or
+arya c
+```
+
+On Mac OS, if you want to implement this function, you can run the `clear` command on the terminal; but this is not particularly convenient; you can use `oh-my-zsh` to configure the command alias in the `.zshrc` file: _alias cls= 'clear'_; in this case, running `cls` is enough to clear the terminal screen content; and this is another case on Windows systems; in this case, using `arya c` is a pretty good choice.
 
 #### 🚝 List the script commands in package.json.
 
