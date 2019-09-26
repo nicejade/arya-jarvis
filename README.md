@@ -46,7 +46,7 @@ The ideal goal is to help us deal with things that can be more precise in the si
 ```bash
 npm i arya-jarvis -g
 # Or
-yarn add global arya-jarvis
+yarn global add arya-jarvis
 ```
 
 ## Usage
@@ -113,7 +113,7 @@ arya ip
 arya port 8080
 ```
 
-### ✂️ Clear the terminal screen if possible
+#### ✂️ Clear the terminal screen if possible
 
 ```bash
 arya clear
