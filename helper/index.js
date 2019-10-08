@@ -10,7 +10,7 @@ const { previewMarkdown } = require('./markdown')
 const checkPort = port => {
   let commandStr
   if (platform === 'darwin' || platform === 'linux') {
-    commandStr = `lsof -i tcp:${port}`
+    commandStr = `sudo lsof -i tcp:${port}`
   } else if (platform === 'win32' || platform === 'win64') {
     commandStr = `netstat -ano | findstr ${port}`
   }
