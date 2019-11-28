@@ -14,6 +14,7 @@ const {
   getIp,
   getPrettify,
   getPrettifyOptions,
+  makeImgGreyscale,
   previewMarkdown,
   print,
   saveQrcode2Local,
@@ -33,6 +34,18 @@ program
   .description('Clear the terminal screen if possible.')
   .action(() => {
     clear()
+  })
+
+program
+  .command('img:greyscale <path>')
+  .alias('igs')
+  .description('greyscale: remove colour from the image.')
+  .action(path => {
+    const isExists = fs.existsSync(path)
+    if (!isExists) {
+      return print('warn', `✘ The path you specified does not exist.`)
+    }
+    makeImgGreyscale(path)
   })
 
 program

@@ -1,3 +1,11 @@
+const fs = require('fs')
+
+if (typeof String.prototype.endsWith != 'function') {
+  String.prototype.endsWith = function(suffix) {
+    return this.indexOf(suffix, this.length - suffix.length) !== -1
+  }
+}
+
 const throttle = (func, gapTime) => {
   if (typeof func !== 'function') {
     throw new TypeError('throttle first param need a function.')
@@ -14,6 +22,12 @@ const throttle = (func, gapTime) => {
   }
 }
 
+const isDirectory = path => {
+  const stat = fs.lstatSync(path)
+  return stat.isDirectory()
+}
+
 module.exports = {
-  throttle
+  throttle,
+  isDirectory
 }
