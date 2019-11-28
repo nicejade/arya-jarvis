@@ -1,11 +1,16 @@
+const fs = require('fs')
 const os = require('os')
+const path = require('path')
 const chalk = require('chalk')
 const qrcode = require('qrcode')
 
 const clear = require('./clear')
 const print = require('./print')
-const platform = process.platform
+const { isDirectory } = require('./utils')
+const { greyscale } = require('./image')
 const { previewMarkdown } = require('./markdown')
+
+const platform = process.platform
 
 const checkPort = port => {
   let commandStr
@@ -48,6 +53,31 @@ const getPrettifyOptions = () => {
   return `--single-quote --no-semi --print-width 100`
 }
 
+/**
+ * @desc make specified path images greyscale
+ * @param {String} spath specified path
+ */
+const makeImgGreyscale = spath => {
+  if (isDirectory(spath)) {
+    fs.readdir(spath, (err, files) => {
+      if (err) return print(`error`, `✘ Opps, Something Error: ${err}`)
+      files.forEach(filename => {
+        greyscale(spath, filename)
+          .then(() => {
+            print(`success`, '✓ Okay, Already successful grayscale picture.')
+          })
+          .catch(err => {
+            print(`warn`, err)
+          })
+      })
+    })
+  } else {
+    greyscale(path.dirname(spath), path.basename(spath)).then(() => {
+      print(`success`, '✓ Okay, Already successful grayscale picture.')
+    })
+  }
+}
+
 const showServerAdress = (port, protocol) => {
   const hostname = chalk.magenta(`${protocol}://${os.hostname}:${port}`)
   const ipAdress = chalk.magenta(`${protocol}://${getIp()}:${port}`)
@@ -85,6 +115,7 @@ module.exports = {
   getPrettifyOptions,
   getDate,
   getIp,
+  makeImgGreyscale,
   previewMarkdown,
   print,
   saveQrcode2Local,
