@@ -1,4 +1,5 @@
 const fs = require('fs')
+const url = require('url')
 
 if (typeof String.prototype.endsWith != 'function') {
   String.prototype.endsWith = function(suffix) {
@@ -27,7 +28,16 @@ const isDirectory = path => {
   return stat.isDirectory()
 }
 
+const getFileNameByUrl = path => {
+  const urlObj = url.parse(path)
+  const pathname = urlObj.pathname
+  const hostname = urlObj.hostname
+  const pathArr = pathname.split('/')
+  return hostname + '@' + pathArr[pathArr.length - 1]
+}
+
 module.exports = {
-  throttle,
-  isDirectory
+  isDirectory,
+  getFileNameByUrl,
+  throttle
 }

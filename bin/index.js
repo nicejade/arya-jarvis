@@ -41,10 +41,6 @@ program
   .alias('igs')
   .description('greyscale: remove colour from the image.')
   .action(path => {
-    const isExists = fs.existsSync(path)
-    if (!isExists) {
-      return print('warn', `✘ The path you specified does not exist.`)
-    }
     makeImgGreyscale(path)
   })
 
