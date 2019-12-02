@@ -57,9 +57,19 @@ const getPrettifyOptions = () => {
  * @desc make specified path images greyscale
  * @param {String} spath specified path
  */
-const makeImgGreyscale = spath => {
+const makeImgGreyscale = (spath = '') => {
+  if (/^https?:\/\//.test(spath)) {
+    return greyscale(process.cwd(), spath, true).then(() => {
+      print(`success`, '✓ Okay, Already successful grayscale picture.')
+    })
+  }
+
+  const isExists = fs.existsSync(spath)
+  if (!isExists) {
+    return print('warn', `✘ The path you specified does not exist.`)
+  }
   if (isDirectory(spath)) {
-    fs.readdir(spath, (err, files) => {
+    return fs.readdir(spath, (err, files) => {
       if (err) return print(`error`, `✘ Opps, Something Error: ${err}`)
       files.forEach(filename => {
         greyscale(spath, filename)
@@ -71,11 +81,10 @@ const makeImgGreyscale = spath => {
           })
       })
     })
-  } else {
-    greyscale(path.dirname(spath), path.basename(spath)).then(() => {
-      print(`success`, '✓ Okay, Already successful grayscale picture.')
-    })
   }
+  greyscale(path.dirname(spath), path.basename(spath)).then(() => {
+    print(`success`, '✓ Okay, Already successful grayscale picture.')
+  })
 }
 
 const showServerAdress = (port, protocol) => {
