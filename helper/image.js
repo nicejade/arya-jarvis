@@ -2,6 +2,7 @@ const fs = require('fs')
 const path = require('path')
 let jimp = require('jimp')
 
+const print = require('./print')
 /*
   const configure = require('@jimp/custom')
   const shadow = require('@jimp/plugin-shadow')
@@ -39,53 +40,51 @@ const _checkAndMkdir = dirname => {
   return isExists
 }
 
-const greyscale = (filedir, filename, isOnlineUrl = false) => {
+const greyscale = async (filedir, filename, isOnlineUrl = false) => {
   const { imagePath, newFileName } = _clumpIimpParams(filedir, filename, isOnlineUrl)
   if (!isOnlineUrl) {
     if (isDirectory(imagePath)) {
-      return Promise.reject(`⚠️ warning:「${imagePath}」not an image file.`)
+      return print(`warn`, `⚠️ warning:「${imagePath}」not an image file.`)
     }
     if (!_isSupportedFormat(imagePath)) {
-      return Promise.reject(`⚠️ warning:「${imagePath}」not an supported image types.`)
+      return print(`warn`, `⚠️ warning:「${imagePath}」not an supported image types.`)
     }
   }
   const greyImgPath = path.join(filedir, 'arya-greyscale-imgs')
   const isExists = _checkAndMkdir(greyImgPath)
-  return jimp
-    .read(imagePath)
-    .then(image => {
-      return image
-        .quality(100)
-        .greyscale()
-        .write(path.join(greyImgPath, newFileName))
-    })
-    .catch(err => {
-      !isExists && fs.rmdirSync(greyImgPath)
-      console.error(err)
-    })
+  try {
+    const image = await jimp.read(imagePath)
+    image
+      .quality(100)
+      .greyscale()
+      .write(path.join(greyImgPath, newFileName))
+    print(`success`, '✓ Okay, Already successful grayscale picture.')
+  } catch (err) {
+    !isExists && fs.rmdirSync(greyImgPath)
+    print(`warn`, err.message)
+  }
 }
 
-const sepiawash = (filedir, filename, isOnlineUrl = false) => {
+const sepiawash = async (filedir, filename, isOnlineUrl = false) => {
   const { imagePath, newFileName } = _clumpIimpParams(filedir, filename, isOnlineUrl)
   if (!isOnlineUrl) {
     if (isDirectory(imagePath)) {
-      return Promise.reject(`⚠️ warning:「${imagePath}」not an image file.`)
+      return print(`warn`, `⚠️ warning:「${imagePath}」not an image file.`)
     }
     if (!_isSupportedFormat(imagePath)) {
-      return Promise.reject(`⚠️ warning:「${imagePath}」not an supported image types.`)
+      return print(`warn`, `⚠️ warning:「${imagePath}」not an supported image types.`)
     }
   }
   const shadowImgPath = path.join(filedir, 'arya-shadow-imgs')
   const isExists = _checkAndMkdir(shadowImgPath)
-  return jimp
-    .read(imagePath)
-    .then(async image => {
-      return image.sepia().write(path.join(shadowImgPath, newFileName))
-    })
-    .catch(err => {
-      !isExists && fs.rmdirSync(shadowImgPath)
-      console.error(err)
-    })
+  try {
+    const image = await jimp.read(imagePath)
+    image.sepia().write(path.join(shadowImgPath, newFileName))
+    print(`success`, '✓ Okay, Already successful apply a sepia wash to the image.')
+  } catch (err) {
+    !isExists && fs.rmdirSync(shadowImgPath)
+    print(`warn`, err.message)
+  }
 }
 
 module.exports = {
