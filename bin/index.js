@@ -15,6 +15,7 @@ const {
   getPrettify,
   getPrettifyOptions,
   makeImgGreyscale,
+  sepiaWashForImg,
   previewMarkdown,
   print,
   saveQrcode2Local,
@@ -42,6 +43,14 @@ program
   .description('greyscale: remove colour from the image.')
   .action(path => {
     makeImgGreyscale(path)
+  })
+
+program
+  .command('img:sepiawash <path>')
+  .alias('isw')
+  .description('Apply a sepia wash to the image.')
+  .action(path => {
+    sepiaWashForImg(path)
   })
 
 program
