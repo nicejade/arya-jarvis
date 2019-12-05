@@ -7,7 +7,7 @@ const qrcode = require('qrcode')
 const clear = require('./clear')
 const print = require('./print')
 const { isDirectory } = require('./utils')
-const { greyscale } = require('./image')
+const { greyscale, sepiawash } = require('./image')
 const { previewMarkdown } = require('./markdown')
 
 const platform = process.platform
@@ -59,9 +59,13 @@ const getPrettifyOptions = () => {
  */
 const makeImgGreyscale = (spath = '') => {
   if (/^https?:\/\//.test(spath)) {
-    return greyscale(process.cwd(), spath, true).then(() => {
-      print(`success`, '✓ Okay, Already successful grayscale picture.')
-    })
+    return greyscale(process.cwd(), spath, true)
+      .then(() => {
+        print(`success`, '✓ Okay, Already successful grayscale picture.')
+      })
+      .catch(err => {
+        print(`warn`, err)
+      })
   }
 
   const isExists = fs.existsSync(spath)
@@ -82,9 +86,55 @@ const makeImgGreyscale = (spath = '') => {
       })
     })
   }
-  greyscale(path.dirname(spath), path.basename(spath)).then(() => {
-    print(`success`, '✓ Okay, Already successful grayscale picture.')
-  })
+  greyscale(path.dirname(spath), path.basename(spath))
+    .then(() => {
+      print(`success`, '✓ Okay, Already successful grayscale picture.')
+    })
+    .catch(err => {
+      print(`warn`, err)
+    })
+}
+
+/**
+ * @desc Creates a shadow on an image.
+ * @param {String} spath specified path
+ */
+const sepiaWashForImg = (spath = '') => {
+  if (/^https?:\/\//.test(spath)) {
+    return sepiawash(process.cwd(), spath, true)
+      .then(() => {
+        print(`success`, '✓ Okay, Already successful apply a sepia wash to the image.')
+      })
+      .catch(err => {
+        print(`warn`, err)
+      })
+  }
+
+  const isExists = fs.existsSync(spath)
+  if (!isExists) {
+    return print('warn', `✘ The path you specified does not exist.`)
+  }
+  if (isDirectory(spath)) {
+    return fs.readdir(spath, (err, files) => {
+      if (err) return print(`error`, `✘ Opps, Something Error: ${err}`)
+      files.forEach(filename => {
+        sepiawash(spath, filename)
+          .then(() => {
+            print(`success`, '✓ Okay, Already successful apply a sepia wash to the image.')
+          })
+          .catch(err => {
+            print(`warn`, err)
+          })
+      })
+    })
+  }
+  sepiawash(path.dirname(spath), path.basename(spath))
+    .then(() => {
+      print(`success`, '✓ Okay, Already successful apply a sepia wash to the image.')
+    })
+    .catch(err => {
+      print(`warn`, err)
+    })
 }
 
 const showServerAdress = (port, protocol) => {
@@ -125,6 +175,7 @@ module.exports = {
   getDate,
   getIp,
   makeImgGreyscale,
+  sepiaWashForImg,
   previewMarkdown,
   print,
   saveQrcode2Local,
