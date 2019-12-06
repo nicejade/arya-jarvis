@@ -1,10 +1,10 @@
-<p align="center"><a href="https://www.jeffjade.com?utm_source=github.com" target="_blank"><img width="100"src="https://raw.githubusercontent.com/nicejade/arya-jarvis/master/assets/images/logo.png"></a></p>
+<p align="center"><a href="https://www.jeffjade.com/2019/08/25/156-arya-jarvis-born-for-efficiency/?utm_source=github.com" target="_blank"><img width="100"src="https://raw.githubusercontent.com/nicejade/arya-jarvis/master/assets/images/logo.png"></a></p>
 
 <h1 align="center">ARYA JARVIS</h1>
 
 <div align="center">
   <strong>
-    Designed to save developers more time and energy
+    Designed to save developers more time and energy.
   </strong>
 </div>
 
@@ -20,8 +20,11 @@
   <a href="https://nicelinks.site/post/5c16083e819ae45de1453caa">
     <img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat" alt="Prettier">
   </a>
-  <a href="https://www.jeffjade.com/">
+  <a href="https://www.jeffjade.com/2019/08/25/156-arya-jarvis-born-for-efficiency/">
     <img src="https://img.shields.io/badge/chat-on%20blog-brightgreen.svg" alt="Arya Jarvis">
+  </a>
+  <a href="https://hacpai.com/article/1569170714522">
+   <img src="https://img.shields.io/badge/Chat-on%20hacpai-brightgreen.svg" alt="Chat On Hacpai">
   </a>
   <a href="https://weibo.com/jeffjade">
     <img src="https://img.shields.io/badge/WeiBo-jeffjade-red.svg?style=flat" alt="Arya Jarvis">
@@ -31,7 +34,7 @@
   </a>
 </div>
 
-### English | [中文](https://www.jeffjade.com/2019/08/25/156-arya-jarvis-born-for-efficiency)
+### English | [中文](https://arya.lovejade.cn/#/zh-cn)
 
 ## Goal and Philosophy
 
@@ -53,7 +56,7 @@ yarn global add arya-jarvis
 
 The following two functions can support multiple format files, such as: `.js`, `.vue`, `.ux`, `.less`, `.scss`, `.css`, `.json`, `.md`, `.html`, `.qxml`, `.wxml`.
 
-#### 💄 Prettier the code under the specified path.
+### 💄 Prettier the code under the specified path.
 
 ```bash
 arya prettier index.js
@@ -63,7 +66,7 @@ arya p ./src/**/**/*.js
 arya p .
 ```
 
-#### 🔬 Listen for code changes in the specified path and prettier them.
+### 🔬 Listen for code changes in the specified path and prettier them.
 
 ```bash
 arya watcher index.js
@@ -75,7 +78,7 @@ arya w .
 
 It is worth mentioning that the code formatting of this project is handled by `arya w .`. Thanks to myself for developing this `arya jarvis` in my spare time, **I am super like it**.
 
-#### 🌍 Used to quickly build a local web server.
+### 🌍 Used to quickly build a local web server.
 
 ```bash
 arya server
@@ -83,7 +86,7 @@ arya server
 arya s
 ```
 
-#### 🌊 One-click preview of the specified Markdown file
+### 🌊 One-click preview of the specified Markdown file
 
 ```bash
 arya markdown README.md
@@ -92,7 +95,7 @@ arya markdown ./nice-project/README.md
 arya m README.md
 ```
 
-##### Watcher (`-w` , `--watch`)
+#### Watcher (`-w` , `--watch`)
 
 By default, the `Markdown` file you specify will not be listened. You can enable the monitor function by adding the `-w` option to refresh your preview page in real time. See the example below：
 
@@ -101,19 +104,26 @@ arya markdown README.md -w
 arya markdown README.md --watch
 ```
 
-#### ⚡️ Find your local IP address and print it.
+### ⚡️ Find your local IP address and print it.
 
 ```bash
 arya ip
 ```
 
-#### 👀 View programs that occupy the specified port.
+### 👀 View programs that occupy the specified port.
 
 ```bash
 arya port 8080
 ```
 
-#### ✂️ Clear the terminal screen if possible
+### 📷 Generate QR code for specified text
+
+```bash
+arya qrcode "https://www.jeffjade.com/"
+arya qrcode "晚晴幽草轩轩主"
+```
+
+### ✂️ Clear the terminal screen if possible
 
 ```bash
 arya clear
@@ -123,20 +133,24 @@ arya c
 
 On Mac OS, if you want to implement this function, you can run the `clear` command on the terminal; but this is not particularly convenient; you can use `oh-my-zsh` to configure the command alias in the `.zshrc` file: _alias cls= 'clear'_; in this case, running `cls` is enough to clear the terminal screen content; and this is another case on Windows systems; in this case, using `arya c` is a pretty good choice.
 
-#### 📷 Greyscale: remove colour from the image.
+### 📷 Greyscale: remove colour from the image.
 
 ```bash
 arya img:greyscale <path>
 
 # 👏 Or Use Alias
 arya igs <path>
+# local folder
 arya igs ./assets/images
+# local image file
 arya igs ./assets/images/logo.png
+# online image address
+arya igs https://www.lovejade.cn/logo.png
 ```
 
 All processed pictures are placed in a new folder: `arya-greyscale-imgs`. Supported Image Types: `.bmp`, `.gif`, `.jpeg`, `.jpg`, `.png`, `.tiff`.
 
-#### 🚝 List the script commands in package.json.
+### 🚝 List the script commands in package.json.
 
 ```bash
 arya ls
@@ -166,4 +180,4 @@ In addition, [arya jarvis](https://github.com/nicejade/arya-jarvis) is still imp
 
 [MIT](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2019-present, [nicejade](https://aboutme.lovejade.cn/?utm_source=arya-jarvis).
+Copyright (c) 2019-present, [nicejade](https://aboutme.lovejade.cn/?utm_source=arya.lovejade.cn).
