@@ -2,10 +2,10 @@ const fs = require('fs')
 const os = require('os')
 const path = require('path')
 const chalk = require('chalk')
-const qrcode = require('qrcode')
 
 const clear = require('./clear')
 const print = require('./print')
+const generateQrcode = require('./qrcode')
 const { isDirectory } = require('./utils')
 const { greyscale, sepiawash } = require('./image')
 const { previewMarkdown } = require('./markdown')
@@ -110,26 +110,6 @@ const showServerAdress = (port, protocol) => {
   console.log(`\nListening on：\n✓ ${hostname} \n✓ ${ipAdress} \n✓ ${localAdress}`)
 }
 
-const saveQrcode2Local = string => {
-  const filename = `arya-qrcode-${getDate()}.png`
-  qrcode.toFile(
-    filename,
-    string,
-    {
-      width: 300,
-      height: 300,
-      color: {
-        dark: '#000000ff',
-        light: '#0000'
-      }
-    },
-    err => {
-      if (err) throw err
-      print(`success`, '✓ Okay, Has successfully generate & save your qrcode.')
-    }
-  )
-}
-
 module.exports = {
   clear,
   checkPort,
@@ -141,6 +121,6 @@ module.exports = {
   sepiaWashForImg,
   previewMarkdown,
   print,
-  saveQrcode2Local,
+  generateQrcode,
   showServerAdress
 }

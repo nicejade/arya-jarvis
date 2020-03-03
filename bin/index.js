@@ -18,7 +18,7 @@ const {
   sepiaWashForImg,
   previewMarkdown,
   print,
-  saveQrcode2Local,
+  generateQrcode,
   showServerAdress
 } = require('./../helper')
 
@@ -132,8 +132,9 @@ program
 program
   .command('qrcode <path>')
   .description('Generate a QR code based on the specified string.')
-  .action(param => {
-    saveQrcode2Local(param)
+  .option('-s, --save', 'Save the generated QR code locally.')
+  .action((string, commands) => {
+    generateQrcode(string, commands)
   })
 
 program

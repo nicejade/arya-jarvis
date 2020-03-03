@@ -1,0 +1,28 @@
+const path = require('path')
+const qrcode = require('qrcode')
+
+const print = require('./print')
+
+const saveQrcode2Loval = string => {
+  const filename = path.join(process.cwd(), `${string}.png`)
+  qrcode.toFile(
+    filename,
+    string,
+    {
+      width: 300,
+      height: 300
+    },
+    err => {
+      if (err) throw err
+      print(`success`, '✓ Okay, Has successfully generate & save your qrcode.')
+    }
+  )
+}
+
+module.exports = (string, commands) => {
+  qrcode.toString(string, { type: 'terminal' }, function(err, url) {
+    if (err) return print('error', `✘ ${err}`)
+    console.log(url)
+  })
+  if (commands.save) saveQrcode2Loval(string)
+}
