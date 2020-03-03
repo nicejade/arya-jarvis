@@ -58,6 +58,10 @@ program
   .description('Find your local IP address and print it.')
   .action(() => {
     console.log(getIp())
+    exec(`curl -L tool.lu/ip`, (error, stdout, stderr) => {
+      console.log(stdout)
+      if (error) return print(`error`, `✘ Opps, Something Error: ${error}`)
+    })
   })
 
 program
