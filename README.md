@@ -123,6 +123,13 @@ arya qrcode "https://www.jeffjade.com/"
 arya qrcode "晚晴幽草轩轩主"
 ```
 
+#### Save (`-s` , `--save`)
+
+```bash
+arya qrcode "https://nicelinks.site/" -s
+arya qrcode "https://www.lovejade.cn/" --save
+```
+
 ### ✂️ Clear the terminal screen if possible
 
 ```bash
