@@ -25,7 +25,7 @@ const checkPort = port => {
 
 const getIp = () => {
   const interfaces = require('os').networkInterfaces()
-  let localIpAdress = '内网IP: '
+  let localIpAdress = ''
   for (let devName in interfaces) {
     let iface = interfaces[devName]
     for (let i = 0, len = iface.length; i < len; i++) {
