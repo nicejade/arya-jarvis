@@ -2,6 +2,7 @@ const fs = require('fs')
 const os = require('os')
 const path = require('path')
 const chalk = require('chalk')
+const qrcode = require('qrcode')
 
 const clear = require('./clear')
 const print = require('./print')
