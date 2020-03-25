@@ -1,6 +1,6 @@
 {
   "name": "arya-jarvis",
-  "version": "1.9.5",
+  "version": "1.9.6",
   "description": "Arya Jarvis: Designed to save developers more time and energy.",
   "main": "bin/index.js",
   "bin": {
