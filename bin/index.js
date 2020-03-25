@@ -57,7 +57,7 @@ program
   .command('ip')
   .description('Find your local IP address and print it.')
   .action(() => {
-    console.log(getIp())
+    console.log(`内网IP: ${getIp()}`)
     exec(`curl -L tool.lu/ip`, (error, stdout, stderr) => {
       console.log(stdout)
       if (error) return print(`error`, `✘ Opps, Something Error: ${error}`)
