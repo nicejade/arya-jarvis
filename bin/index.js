@@ -18,6 +18,7 @@ const {
   sepiaWashForImg,
   previewMarkdown,
   print,
+  renameBatchFiles,
   generateQrcode,
   showServerAdress
 } = require('./../helper')
@@ -135,6 +136,16 @@ program
   .option('-s, --save', 'Save the generated QR code locally.')
   .action((string, commands) => {
     generateQrcode(string, commands)
+  })
+
+program
+  .command('rename <path>')
+  .description('Rename batch files (Incremental).')
+  .option('-n, --name <name>', 'New file name specified (String).')
+  .option('-i, --initial <initial>', 'Initial incremental value (Number).')
+  .option('-s, --separator <separator>', 'Separator between name and incremental value (-).')
+  .action((string, commands) => {
+    renameBatchFiles(string, commands)
   })
 
 program

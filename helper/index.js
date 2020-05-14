@@ -111,6 +111,33 @@ const showServerAdress = (port, protocol) => {
   console.log(`\nListening on：\n✓ ${hostname} \n✓ ${ipAdress} \n✓ ${localAdress}`)
 }
 
+const renameBatchFiles = (spath, commands) => {
+  let initialNum = +commands.initial || 0
+  const namePrefix = commands.name
+  const separator = commands.separator || '-'
+  const isExists = fs.existsSync(spath)
+  if (!isExists) {
+    return print('warn', `✘ The path you specified does not exist.`)
+  }
+  if (isDirectory(spath)) {
+    fs.readdir(spath, (err, files) => {
+      if (err) return print(`error`, `✘ Opps, Something Error: ${err}`)
+      files.forEach(filename => {
+        const tempNameArr = filename.split('.')
+        const fileType = tempNameArr[tempNameArr.length - 1]
+        const nameSuffix = `${++initialNum - 1}`.padStart(3, '0')
+        const newFileName = `${namePrefix}${separator}${nameSuffix}.${fileType}`
+        const oldPath = path.join(spath, filename)
+        const newPath = path.join(spath, newFileName)
+        fs.renameSync(oldPath, newPath)
+      })
+    })
+    return print(`success`, '✓ Has been successfully renamed for you in bulk.')
+  } else {
+    return print('warn', `✘ The expected path is a folder directory.`)
+  }
+}
+
 module.exports = {
   clear,
   checkPort,
@@ -123,5 +150,6 @@ module.exports = {
   previewMarkdown,
   print,
   generateQrcode,
+  renameBatchFiles,
   showServerAdress
 }
