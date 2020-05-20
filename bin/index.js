@@ -144,6 +144,7 @@ program
   .option('-n, --name <name>', 'New file name specified (String).')
   .option('-i, --initial <initial>', 'Initial incremental value (Number).')
   .option('-s, --separator <separator>', 'Separator between name and incremental value (-).')
+  .option('-d, --digits <digits>', 'Specify incremental digits value (3).')
   .action((string, commands) => {
     renameBatchFiles(string, commands)
   })
