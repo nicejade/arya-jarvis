@@ -8,7 +8,7 @@ const clear = require('./clear')
 const print = require('./print')
 const generateQrcode = require('./qrcode')
 const { isDirectory } = require('./utils')
-const { greyscale, sepiawash } = require('./image')
+const { addShadowForImg, greyscale, sepiawash } = require('./image')
 const { previewMarkdown } = require('./markdown')
 
 const platform = process.platform
@@ -76,6 +76,23 @@ const makeImgGreyscale = (spath = '') => {
     return
   }
   greyscale(path.dirname(spath), path.basename(spath))
+}
+
+/**
+ * @desc add shadow for your images.
+ * @param {String} spath specified path
+ */
+const makeImgAddShadow = (spath = '') => {
+  if (isDirectory(spath)) {
+    fs.readdir(spath, (err, files) => {
+      if (err) return print(`error`, `✘ Opps, Something Error: ${err}`)
+      files.forEach(async filename => {
+        await addShadowForImg(spath, filename)
+      })
+    })
+    return
+  }
+  print('warn', `✘ Please enter the specified directory address.`)
 }
 
 /**
@@ -168,6 +185,7 @@ module.exports = {
   getDate,
   getIp,
   makeImgGreyscale,
+  makeImgAddShadow,
   sepiaWashForImg,
   previewMarkdown,
   print,
