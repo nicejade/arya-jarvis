@@ -15,6 +15,7 @@ const {
   getPrettify,
   getPrettifyOptions,
   makeImgGreyscale,
+  makeImgAddShadow,
   sepiaWashForImg,
   previewMarkdown,
   print,
@@ -44,6 +45,14 @@ program
   .description('greyscale: remove colour from the image.')
   .action(path => {
     makeImgGreyscale(path)
+  })
+
+program
+  .command('img:shadow  <path>')
+  .alias('ishadow')
+  .description('shadow: add shadow for your images.')
+  .action(path => {
+    makeImgAddShadow(path)
   })
 
 program
@@ -136,7 +145,7 @@ program
   .option('-s, --save', 'Save the generated QR code locally.')
   .option('-w, --width <width>', 'Specify the width of the Qrcode (300).')
   .action((string, commands) => {
-    generateQrcode(string, commands)
+    generateQrimgcode(string, commands)
   })
 
 program
