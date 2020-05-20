@@ -134,6 +134,7 @@ program
   .command('qrcode <path>')
   .description('Generate a QR code based on the specified string.')
   .option('-s, --save', 'Save the generated QR code locally.')
+  .option('-w, --width <width>', 'Specify the width of the Qrcode (300).')
   .action((string, commands) => {
     generateQrcode(string, commands)
   })

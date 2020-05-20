@@ -3,14 +3,14 @@ const qrcode = require('qrcode')
 
 const print = require('./print')
 
-const saveQrcode2Loval = string => {
+const saveQrcode2Loval = (string, commands) => {
   const filename = path.join(process.cwd(), `${string}.png`)
   qrcode.toFile(
     filename,
     string,
     {
-      width: 300,
-      height: 300
+      width: commands.width || 300,
+      height: commands.width || 300
     },
     err => {
       if (err) throw err
@@ -24,5 +24,5 @@ module.exports = (string, commands) => {
     if (err) return print('error', `✘ ${err}`)
     console.log(url)
   })
-  if (commands.save) saveQrcode2Loval(string)
+  if (commands.save) saveQrcode2Loval(string, commands)
 }
