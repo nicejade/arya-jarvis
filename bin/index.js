@@ -145,7 +145,7 @@ program
   .option('-s, --save', 'Save the generated QR code locally.')
   .option('-w, --width <width>', 'Specify the width of the Qrcode (300).')
   .action((string, commands) => {
-    generateQrimgcode(string, commands)
+    generateQrcode(string, commands)
   })
 
 program
