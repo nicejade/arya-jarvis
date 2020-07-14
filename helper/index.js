@@ -169,7 +169,7 @@ const renameBatchFiles = async (spath, commands) => {
     const specificPrefix = '_ARYA-SPECIFIC-PREFIX_'
     await _renameAllFiles(spath, commands, specificPrefix)
 
-    const appointedPrefix = commands.name
+    const appointedPrefix = commands.name || 'arya-javis'
     await _renameAllFiles(spath, commands, appointedPrefix)
     return print(`success`, '✓ Has been successfully renamed for you in bulk.')
   } else {
