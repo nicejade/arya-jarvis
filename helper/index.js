@@ -26,14 +26,12 @@ const checkPort = port => {
 const getIp = () => {
   const interfaces = require('os').networkInterfaces()
   let localIpAdress = ''
-  for (let devName in interfaces) {
-    let iface = interfaces[devName]
-    for (let i = 0, len = iface.length; i < len; i++) {
-      let alias = iface[i]
-      if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
-        localIpAdress += alias.address
-      }
-    }
+  for (var dev in interfaces) {
+    // ... and find the one that matches the criteria
+    var iface = interfaces[dev].filter(function(details) {
+      return details.family === 'IPv4' && details.internal === false
+    })
+    if (iface.length > 0) localIpAdress = iface[0].address
   }
   return localIpAdress || 'localhost'
 }
@@ -146,7 +144,7 @@ const _renameAllFiles = (spath, commands, namePrefix) => {
           const nameSuffix = `${++initialNum - 1}`.padStart(digits, '0')
           const newFileName = `${namePrefix}${separator}${nameSuffix}.${fileType}`
           if (newFileName === filename) return false
-        
+
           const oldPath = path.join(spath, filename)
           const newPath = path.join(spath, newFileName)
           fs.renameSync(oldPath, newPath)
