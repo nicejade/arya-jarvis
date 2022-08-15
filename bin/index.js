@@ -166,12 +166,10 @@ program
   .description('Used to quickly build a local web server.')
   .action(params => {
     const protocol = params.https ? `https` : 'http'
-    const pro = params.https ? `--https` : ''
     portfinder.basePort = 8080
     portfinder.getPortPromise().then(port => {
-      const stack = resolve('./node_modules/lws-static')
-      const index = resolve('./node_modules/lws-index')
-      exec(`npx lws --stack ${stack} ${index} --port ${port} ${pro}`, error => {
+      console.log(`---`, port)
+      exec(`npx http-server --port ${port} ${params.https ? '--ssl' : ''}`, error => {
         if (error) return print(`error`, `✘ Opps, Something Error: ${error}`)
       })
       showServerAdress(port, protocol)

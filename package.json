@@ -1,6 +1,6 @@
 {
   "name": "arya-jarvis",
-  "version": "1.11.2",
+  "version": "1.12.0",
   "description": "Arya Jarvis: Designed to save developers more time and energy.",
   "main": "bin/index.js",
   "bin": {
@@ -21,9 +21,6 @@
     "gulp-watch": "^5.0.1",
     "jimp": "^0.9.3",
     "koa": "^2.8.1",
-    "lws": "^2.0.3",
-    "lws-index": "^1.0.5",
-    "lws-static": "^1.1.3",
     "marked": "^0.7.0",
     "onchange": "^6.0.0",
     "opn": "^6.0.0",
