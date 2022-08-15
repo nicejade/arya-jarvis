@@ -333,6 +333,72 @@
     "@babel/runtime" "^7.7.2"
     core-js "^3.4.1"
 
+"@napi-rs/clipboard-darwin-arm64@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@napi-rs/clipboard-darwin-arm64/-/clipboard-darwin-arm64-1.0.1.tgz#061e3f5bf4ac0bd4f9c91405862cc773eaa37760"
+  integrity sha512-PCMyPwoLAwFZOQWeCQsdVIxz5IpofqLpAaBLFz2ALoFQ2I1FbY+AoL0DGXtvcuqrcuz4U6xk9mfI4fzrKClHew==
+
+"@napi-rs/clipboard-darwin-x64@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@napi-rs/clipboard-darwin-x64/-/clipboard-darwin-x64-1.0.1.tgz#f44325172214387bf5604c4554f2aa4fe41ea64b"
+  integrity sha512-0Tl8NnOPGEXyu8rV3xcYqOuqwQQpK5Pex9T4v+c+/XBLEv7OUtWHy/0pF0Zn7osWzZg9EfmKo22VJGFsBjEVPg==
+
+"@napi-rs/clipboard-linux-arm-gnueabihf@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@napi-rs/clipboard-linux-arm-gnueabihf/-/clipboard-linux-arm-gnueabihf-1.0.1.tgz#e8e3126cf6ab9eaa122b751024648d58ba017f00"
+  integrity sha512-/gsiFTmw6EQVLTJSusGEXwCr9qSNVbdf3YUCtAw7u+mP22TQ1IBkoFBBJrvJWuRlqq/ltJ8Zw/NvEo/pcpkJ2g==
+
+"@napi-rs/clipboard-linux-arm64-gnu@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@napi-rs/clipboard-linux-arm64-gnu/-/clipboard-linux-arm64-gnu-1.0.1.tgz#80912a5149eb55dc997b078c964017c4682f2978"
+  integrity sha512-CuxN9IGlNGBYfiWJWJI+r2MKPdU6SwkoylV0WD7xuYWk+3f5dQ4m931zDVkZm9PWmmSQ/vpjDPgChcMilYcY2w==
+
+"@napi-rs/clipboard-linux-arm64-musl@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@napi-rs/clipboard-linux-arm64-musl/-/clipboard-linux-arm64-musl-1.0.1.tgz#a9fa9da850897a52a0628c131351e58848e1a726"
+  integrity sha512-vfDL2uf7VVYxPJx9ed6YmVMHQoavAzYziMBWIMgyoqvyb38wM0Cdve+ifvYlv9Rs3RU7BaX7GfTxK6mE+E/OOw==
+
+"@napi-rs/clipboard-linux-x64-gnu@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@napi-rs/clipboard-linux-x64-gnu/-/clipboard-linux-x64-gnu-1.0.1.tgz#e7fa9b1f56f96e77e5719914ceac01d65a0fea64"
+  integrity sha512-7sw7XClQ9mdMNckQjNMzJhzSGa59UVJAHNZeAQy8lanwaAfiYVXEBILYIS1Ta96APdO8Rmxh1wA/VuN83r652Q==
+
+"@napi-rs/clipboard-linux-x64-musl@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@napi-rs/clipboard-linux-x64-musl/-/clipboard-linux-x64-musl-1.0.1.tgz#3d8d6c3e99b615c5bdc940bf0c85c18c177da548"
+  integrity sha512-4hh2X93TfYDGuW1vdDZ/IvgO0SEU4blzmPYE2rgDcbGgY6QGnPTqftDxOIUUmVexrT8TIIP59SeURtuQCIRFZA==
+
+"@napi-rs/clipboard-win32-arm64-msvc@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@napi-rs/clipboard-win32-arm64-msvc/-/clipboard-win32-arm64-msvc-1.0.1.tgz#4b1729fe70ffce2da0359b6d80a83aad14540b06"
+  integrity sha512-xURZafWXD+nVcuNb5sAlbPGHpP9NGMPtQDlcW61Na6lOxQ9MsUKkuIVPQL1YE2u6Ze1euLvi6hjaMyYdMfR/Sg==
+
+"@napi-rs/clipboard-win32-ia32-msvc@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@napi-rs/clipboard-win32-ia32-msvc/-/clipboard-win32-ia32-msvc-1.0.1.tgz#3c115d47fe356e3079427c4f9d326e09ae3d422d"
+  integrity sha512-rd2D7FAcnpt4iM2uPUKBDkhKbuyj66rZXQLejlyYVlJHHEQ7IbS/clsDBx/8qxsHlwr0UUNP7x0r7vMREtmqwg==
+
+"@napi-rs/clipboard-win32-x64-msvc@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@napi-rs/clipboard-win32-x64-msvc/-/clipboard-win32-x64-msvc-1.0.1.tgz#2dd37ca630d520fbdbd4ec442283ee85f026764e"
+  integrity sha512-sQDv6MSM33v0Gh+iC7mPcb02dpyANQu6VGqgeJdJ8qwACF5ZlH6tA57nFSN2lHkabr01CSfyaFRiLxI9bvvN2A==
+
+"@napi-rs/clipboard@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@napi-rs/clipboard/-/clipboard-1.0.1.tgz#0f663a72e52e812c33af6ede2884271989f21736"
+  integrity sha512-7JAxWEi+uSv4k07tj8u4qz5qmaAimLLy1ysy3MMnNbX58pkMliUKGocmyJ3g5eehn73H317sC/yOX6pPre0UUA==
+  optionalDependencies:
+    "@napi-rs/clipboard-darwin-arm64" "1.0.1"
+    "@napi-rs/clipboard-darwin-x64" "1.0.1"
+    "@napi-rs/clipboard-linux-arm-gnueabihf" "1.0.1"
+    "@napi-rs/clipboard-linux-arm64-gnu" "1.0.1"
+    "@napi-rs/clipboard-linux-arm64-musl" "1.0.1"
+    "@napi-rs/clipboard-linux-x64-gnu" "1.0.1"
+    "@napi-rs/clipboard-linux-x64-musl" "1.0.1"
+    "@napi-rs/clipboard-win32-arm64-msvc" "1.0.1"
+    "@napi-rs/clipboard-win32-ia32-msvc" "1.0.1"
+    "@napi-rs/clipboard-win32-x64-msvc" "1.0.1"
+
 accepts@^1.3.5, accepts@~1.3.4:
   version "1.3.8"
   resolved "https://registry.yarnpkg.com/accepts/-/accepts-1.3.8.tgz#0bf0be125b67014adcb0b0921e62db7bffe16b2e"

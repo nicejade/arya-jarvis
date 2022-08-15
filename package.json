@@ -16,6 +16,7 @@
     "test": "test"
   },
   "dependencies": {
+    "@napi-rs/clipboard": "^1.0.1",
     "chalk": "^2.4.2",
     "commander": "^3.0.0",
     "gulp-watch": "^5.0.1",

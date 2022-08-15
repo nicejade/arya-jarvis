@@ -67,7 +67,11 @@ program
   .command('ip')
   .description('Find your local IP address and print it.')
   .action(() => {
-    console.log(`内网IP: ${getIp()}`)
+    const localIpAdress = getIp()
+    console.log(`内网IP: ${localIpAdress}.（已复制到您的剪切板）`)
+    const { Clipboard } = require('@napi-rs/clipboard')
+    const clipboard = new Clipboard()
+    clipboard.setText(localIpAdress)
     exec(`curl -L tool.lu/ip`, (error, stdout, stderr) => {
       console.log(stdout)
       if (error) return print(`error`, `✘ Opps, Something Error: ${error}`)
