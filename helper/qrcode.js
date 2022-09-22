@@ -20,9 +20,9 @@ const saveQrcode2Loval = (string, commands) => {
 }
 
 module.exports = (string, commands) => {
-  qrcode.toString(string, { type: 'terminal' }, function(err, url) {
+  qrcode.toString(string, { type: 'terminal', small: true, width: 200}, (err, url) => {
     if (err) return print('error', `✘ ${err}`)
     console.log(url)
   })
-  if (commands.save) saveQrcode2Loval(string, commands)
+  if (commands && commands.save) saveQrcode2Loval(string, commands)
 }

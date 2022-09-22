@@ -2,7 +2,6 @@ const fs = require('fs')
 const os = require('os')
 const path = require('path')
 const chalk = require('chalk')
-const qrcode = require('qrcode')
 
 const clear = require('./clear')
 const print = require('./print')
@@ -120,9 +119,7 @@ const showServerAdress = (port, protocol) => {
   const hostname = chalk.magenta(`${protocol}://${os.hostname}:${port}`)
   const ipAdress = chalk.magenta(`${protocol}://${getIp()}:${port}`)
   const localAdress = chalk.magenta(`${protocol}://127.0.0.1:${port}`)
-  qrcode.toString(`${protocol}://${getIp()}:${port}`, { type: 'terminal' }, (err, url) => {
-    console.log(url)
-  })
+  generateQrcode(`${protocol}://${getIp()}:${port}`)
   console.log(`\nListening on：\n✓ ${hostname} \n✓ ${ipAdress} \n✓ ${localAdress}`)
 }
 

@@ -172,7 +172,6 @@ program
     const protocol = params.https ? `https` : 'http'
     portfinder.basePort = 8080
     portfinder.getPortPromise().then(port => {
-      console.log(`---`, port)
       exec(`npx http-server --port ${port} ${params.https ? '--ssl' : ''}`, error => {
         if (error) return print(`error`, `✘ Opps, Something Error: ${error}`)
       })
