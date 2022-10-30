@@ -24,10 +24,6 @@ const {
   showServerAdress
 } = require('./../helper')
 
-const resolve = dir => {
-  return path.join(__dirname, '..', dir)
-}
-
 const version = require(`./../package.json`).version
 program.version(version, '-v, --vers', 'output the current version')
 
@@ -193,6 +189,19 @@ program
         if (error) return print(`error`, `✘ Opps, Something Error: ${error}`)
       }
     )
+  })
+
+program
+  .command('escaped:fragment <path>')
+  .alias('ef')
+  .description('Request the real source code of the webpage.')
+  .action(path => {
+    const command = `curl ${path}\?_escaped_fragment_`
+    console.log(command)
+    exec(command, (error, stdout, stderr) => {
+      console.log(stdout)
+      if (error) return print(`error`, `✘ Opps, Something Error: ${error}`)
+    })
   })
 
 program.parse(process.argv)
