@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
 const fs = require('fs')
-const path = require('path')
 const { exec } = require('child_process')
 const chalk = require('chalk')
 const portfinder = require('portfinder')
 const commander = require('commander')
 const program = new commander.Command()
+const { Clipboard } = require('@napi-rs/clipboard')
 
 const {
   clear,
@@ -65,7 +65,6 @@ program
   .action(() => {
     const localIpAdress = getIp()
     console.log(`内网IP: ${localIpAdress}.（已复制到您的剪切板）`)
-    const { Clipboard } = require('@napi-rs/clipboard')
     const clipboard = new Clipboard()
     clipboard.setText(localIpAdress)
     exec(`curl -L tool.lu/ip`, (error, stdout, stderr) => {
@@ -200,6 +199,21 @@ program
     console.log(command)
     exec(command, (error, stdout, stderr) => {
       console.log(stdout)
+      if (error) return print(`error`, `✘ Opps, Something Error: ${error}`)
+    })
+  })
+
+program
+  .command('copy:pwd')
+  .alias('pwd')
+  .description('Copy the results of the pwd command to the clipboard.')
+  .action(_ => {
+    exec('pwd', (error, stdout, stderr) => {
+      const pwd = stdout.replace('\n', '')
+      console.log(pwd)
+      print('success', `🎉 pwd exec result has been copied to your clipboard.`)
+      const clipboard = new Clipboard()
+      clipboard.setText(pwd)
       if (error) return print(`error`, `✘ Opps, Something Error: ${error}`)
     })
   })
