@@ -171,6 +171,36 @@ const renameBatchFiles = async (spath, commands) => {
   }
 }
 
+const generatePassword = (length = 8, special = true) => {
+  // 定义字符集
+  const lowercase = 'abcdefghijklmnopqrstuvwxyz'
+  const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  const numbers = '0123456789'
+  const specials = special ? '!@#$%^&*()_+-=[]{}|;:,.<>?' : ''
+
+  // 确保密码长度至少为 8 位
+  const finalLength = Math.max(8, length)
+
+  // 确保每种字符都至少使用一次
+  let password = [
+    lowercase[Math.floor(Math.random() * lowercase.length)],
+    uppercase[Math.floor(Math.random() * uppercase.length)],
+    numbers[Math.floor(Math.random() * numbers.length)],
+    specials[Math.floor(Math.random() * specials.length)]
+  ]
+
+  // 合并所有可用字符
+  const allChars = lowercase + uppercase + numbers + specials
+
+  // 填充剩余长度
+  while (password.length < finalLength) {
+    password.push(allChars[Math.floor(Math.random() * allChars.length)])
+  }
+
+  // 打乱数组顺序
+  return password.sort(() => Math.random() - 0.5).join('')
+}
+
 module.exports = {
   clear,
   checkPort,
@@ -185,5 +215,6 @@ module.exports = {
   print,
   generateQrcode,
   renameBatchFiles,
-  showServerAdress
+  showServerAdress,
+  generatePassword
 }

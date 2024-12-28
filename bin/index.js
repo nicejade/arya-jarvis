@@ -21,7 +21,8 @@ const {
   print,
   renameBatchFiles,
   generateQrcode,
-  showServerAdress
+  showServerAdress,
+  generatePassword
 } = require('./../helper')
 
 const version = require(`./../package.json`).version
@@ -213,6 +214,24 @@ program
     console.log(`Current path[pwd] is: "${currentPath}"`)
     clipboard.setText(currentPath)
     print('success', `🎉 Copied the current path to the clipboard.`)
+  })
+
+program
+  .command('password')
+  .alias('pw')
+  .description('Generate specify the length of the password.')
+  .option('-l, --length <length>', 'The length of the generated password(default 8).')
+  .option('-s, --special <special>', 'Whether special characters are needed(default true).')
+  .action(params => {
+    const length = params.length || 8
+    const special = !['false', '0', 'null', 'undefined', 'no'].includes(
+      params.special?.toLowerCase()
+    )
+    const password = generatePassword(length, special)
+    console.log(`The generated password is: "${password}"`)
+    const clipboard = new Clipboard()
+    clipboard.setText(password)
+    print('success', `🎉 Copied the generated password to the clipboard.`)
   })
 
 program.parse(process.argv)
