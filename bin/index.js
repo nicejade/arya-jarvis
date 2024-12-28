@@ -206,16 +206,13 @@ program
 program
   .command('copy:pwd')
   .alias('pwd')
-  .description('Copy the results of the pwd command to the clipboard.')
+  .description('Copy the current path to the clipboard.')
   .action(_ => {
-    exec('pwd', (error, stdout, stderr) => {
-      const pwd = stdout.replace('\n', '')
-      console.log(pwd)
-      print('success', `🎉 pwd exec result has been copied to your clipboard.`)
-      const clipboard = new Clipboard()
-      clipboard.setText(pwd)
-      if (error) return print(`error`, `✘ Opps, Something Error: ${error}`)
-    })
+    const currentPath = process.cwd()
+    const clipboard = new Clipboard()
+    console.log(`Current path[pwd] is: "${currentPath}"`)
+    clipboard.setText(currentPath)
+    print('success', `🎉 Copied the current path to the clipboard.`)
   })
 
 program.parse(process.argv)
