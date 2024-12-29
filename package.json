@@ -42,5 +42,13 @@
     "jarvis"
   ],
   "author": "nicejade",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicejade/arya-jarvis.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nicejade/arya-jarvis/issues"
+  },
+   "homepage": "https://arya.lovejade.cn/"
 }
